@@ -1,0 +1,123 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk>
+<window 
+	title="User Management" 
+	border="normal" 
+	hflex="1" 
+	vflex="1" 
+	contentStyle="overflow:auto" 
+	apply="org.zkoss.bind.BindComposer" 
+	viewModel="@id('vm') @init(manageUserController)" validationMessages="@id('vmsgs')">
+
+	<caption src="img/todo.png" label="gepengnix.wordpress.com" />
+
+	<borderlayout>
+
+	<east autoscroll="true">
+
+<hbox>
+	<vlayout>
+		<grid hflex="1" form="@id('fx') @load(vm.manageUserVM)  @save(vm.manageUserVM, before='add') 
+		@validator('id.or.linuxjak.controller.validator.UserValidator') " >
+			<columns>
+				<column align="right" hflex="min"/>
+				<column/>
+			</columns>
+
+			<rows>
+			<row visible="@load(not empty vm.manageUserVM.idUser)">
+					<cell sclass="row-title">Id :</cell>
+					<cell> <label width="200px" value="@bind(fx.idUser)" 
+										/></cell>
+				</row>
+		
+				<row>
+					<cell sclass="row-title">Username :</cell>
+					<cell> <textbox width="200px" value="@bind(fx.username)"
+										constraint="no empty: Please enter your username" /></cell>
+				</row>
+				
+				<row>
+					<cell sclass="row-title">Password :</cell>
+					<cell> <textbox type="password"  width="200px" value="@bind(fx.password)"
+										constraint="no empty: Please enter your password" errorMessage="@load(vmsgs['passwordMatch'])"/></cell>
+				</row>
+				
+				<row>
+					<cell sclass="row-title">Re-Password :</cell>
+					<cell> <textbox type="password" width="200px" value="@bind(fx.passwordConfirm)"
+										constraint="no empty: Please enter your password" errorMessage="@load(vmsgs['passwordMatch'])"/></cell>
+				</row>
+				
+				<row>
+					<cell sclass="row-title">Job :</cell>
+					<cell>
+						<radiogroup model="@load(vm.job)" selectedItem="@bind(fx.job)">
+							<template name="model">
+								<radio label="@load(each)"/>	
+							</template>
+						</radiogroup>
+					</cell>
+				</row>
+				<row>
+					<cell sclass="row-title">name :</cell>
+					<cell> <textbox  width="200px" value="@bind(fx.name)"
+										constraint="no empty: Please enter your name"/></cell>
+				</row>
+				<row>
+					<cell sclass="row-title">Last Name :</cell>
+					<cell> <textbox  width="200px" value="@bind(fx.lastName)"
+										constraint="no empty: Please enter your last name"  /></cell>
+				</row>
+				<row>
+					<cell sclass="row-title">Alamat :</cell>
+					<cell> <textbox  width="200px" value="@bind(fx.alamat)"
+										constraint="no empty: Please enter your Alamat" multiline="true" /></cell>
+				</row>
+				<row>
+		    		<button label="Save/Update" onClick="@command('add')"></button>
+	<!-- 	<button label="Edit" onClick="@command('editUser')"></button>
+	 -->	    	</row>
+						
+			</rows>
+		</grid>
+				
+	</vlayout>
+	
+	<grid height="500px"  model="@load(vm.manageUserVM.ucd)"
+            emptyMessage="Nothing in User.">
+            <columns>
+                <column label="Id" width="50px" />
+                <column label="Username" />
+                <column label="Name" width="150px" />
+                <column label="Last Name" width="80px" />
+                <column label="job" width="100px" />
+                  <column label="Alamat"  />
+                  <column label="Action" width="100px" />
+            </columns>
+            <template name="model">
+                <row>
+                 
+                    <label value="@load(each.id)" />
+                    <label value="@load(each.username)" />
+                    <label value="@load(each.name)" />
+                    <label value="@load(each.lastName)" />
+                    <label value="@load(each.job)" />
+                    <label value="@load(each.address)" />
+                    <cell>
+                    <button label="Delete" onClick="@command('delete', item=each.id)" />
+                      <button label="Edit" onClick="@command('edit', item=each.id)" />
+                </cell>
+                </row>
+            </template>
+        </grid>
+		
+
+
+</hbox>
+
+	</east>
+	</borderlayout>
+	
+</window>
+</zk>

@@ -1,0 +1,71 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<display-name>Archetype Created Web Application</display-name>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:spring-ctx.xml
+		</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:log4j.properties</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- For using session scoped bean -->
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>org.zkoss.zk.ui.http.HttpSessionListener</listener-class>
+	</listener>
+	
+	<servlet>
+
+		<servlet-name>zkLoader</servlet-name>
+		<servlet-class>org.zkoss.zk.ui.http.DHtmlLayoutServlet</servlet-class>
+		<!-- Must. Specifies URI of the update engine (DHtmlUpdateServlet). It 
+			must be the same as <url-pattern> for the update engine. -->
+		<init-param>
+			<param-name>update-uri</param-name>
+			<param-value>/zkau</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup><!-- MUST -->
+	</servlet>
+	<servlet>
+
+		<servlet-name>auEngine</servlet-name>
+		<servlet-class>org.zkoss.zk.au.http.DHtmlUpdateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>zkLoader</servlet-name>
+		<url-pattern>*.zul</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>zkLoader</servlet-name>
+		<url-pattern>*.zhtml</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>auEngine</servlet-name>
+		<url-pattern>/zkau/*</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.zul</welcome-file>
+	</welcome-file-list>
+</web-app>

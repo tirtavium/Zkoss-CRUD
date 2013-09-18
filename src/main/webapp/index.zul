@@ -1,0 +1,13 @@
+<?link rel="stylesheet" type="text/css" href="style.css"?>
+<zk>
+	<borderlayout hflex="1" vflex="1">
+	
+		
+
+		<center autoscroll="true" id="mainContent">
+			<include src="layout/usrManagement.zul"></include>
+		</center>
+
+	</borderlayout>
+
+</zk>
