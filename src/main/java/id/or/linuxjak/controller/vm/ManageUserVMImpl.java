@@ -27,6 +27,8 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Filedownload;
+import org.zkoss.zul.Iframe;
+import org.zkoss.zul.Window;
 
 
 @Component("manageUserVM")
@@ -125,18 +127,19 @@ public class ManageUserVMImpl implements ManageUserVM {
 	}
 	
 	public void printPDF(){
-		Collection<UserControllerDomain> coll = this.ucd;
+		Window win = (Window) Executions.createComponents("/layout/report.zul", null, null);
 		System.out.println(Executions.getCurrent().getDesktop().getWebApp().getResourcePaths("/")+" path jasper");
-		  JRDataSource ds = new JRBeanCollectionDataSource(coll);
+		  JRDataSource ds = new JRBeanCollectionDataSource(this.ucd);
 		  ByteArrayOutputStream output = new ByteArrayOutputStream();
 		    try {
 		        JasperPrint jasperPrint = JasperFillManager.fillReport(Executions.getCurrent().getDesktop().getWebApp().getRealPath("/") + "/testJasper.jasper", new HashMap(), ds);
 		         JasperExportManager.exportReportToPdfStream(jasperPrint,output);
 		     
 		       	AMedia amedia = new AMedia("report", "pdf", "application/pdf", output.toByteArray());
-				Filedownload.save(amedia);
+		//		Filedownload.save(amedia); //untuk download ke browser
 
-		    
+				Iframe frame = (Iframe) win.getFellow("reportframe");
+				   frame.setContent(amedia);
 		    } catch (Exception e) {
 		        // TODO Auto-generated catch block
 		        e.printStackTrace();

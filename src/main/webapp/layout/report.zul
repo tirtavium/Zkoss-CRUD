@@ -1,0 +1,4 @@
+<window title="Report" border="normal" width="800px" height="600px" closable="true" mode="modal">
+	<iframe id="reportframe" width="800px" height="600px"> </iframe>
+	  
+</window>
