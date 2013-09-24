@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="testJasper" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fa566e77-d31f-48cd-867a-b2b90e1236c3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="318"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="b6ab01e8-146e-4795-9fa6-b879d7f416ec">
+		<field name="id" class="java.lang.Integer"/>
+		<field name="userName" class="java.lang.String"/>
+		<field name="lastName" class="java.lang.String"/>
+		<field name="name" class="java.lang.String"/>
+		<field name="address" class="java.lang.String"/>
+	</subDataset>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="userName" class="java.lang.String"/>
+	<field name="lastName" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement uuid="c3768124-737b-4b22-9400-dce3bbd93858" stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="595" height="802"/>
+				<imageExpression><![CDATA["http://gepengnix.files.wordpress.com/2013/09/feather1.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="1b6615e3-3607-4a0b-adb3-767b800a1b1c" x="0" y="0" width="320" height="34"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="14" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Gepengnix.wordpress.com]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c2b08a1c-91c4-48d1-8be5-90d52e7e7703" x="83" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f52cd3d9-a401-45cd-b04a-923b82840838" x="183" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[userName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2c7522e9-a21f-4968-8c7f-eed495128f3e" x="283" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[firstName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d7fd1eb0-e02d-4caa-8df8-ebe2516aa27e" x="383" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26">
+			<textField>
+				<reportElement uuid="0f5fc85a-fd2f-4244-bc44-adfc3d5ee241" x="183" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{userName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fe02bca6-8158-4540-8d2d-7cd9f9a373b8" x="283" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{lastName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0b0ca594-c17b-497c-bf8f-1262789fcfc3" x="383" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9c108029-4a21-4dc3-9d89-158ff527b9ff" x="83" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23">
+			<staticText>
+				<reportElement uuid="d5a116b4-8223-40ec-b9fb-f3cd3d765188" x="342" y="0" width="113" height="14"/>
+				<textElement/>
+				<text><![CDATA[ tutorial Jasper Report]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="bf5e4dea-7cb5-43d5-aced-88b25a76ff3d" x="455" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
