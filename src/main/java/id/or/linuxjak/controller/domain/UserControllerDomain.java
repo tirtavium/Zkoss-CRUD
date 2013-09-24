@@ -4,7 +4,7 @@ public class UserControllerDomain {
 
 private Long id;
 //textbox
-private String username;
+private String userName;
 
 //password
 private String password;
@@ -30,12 +30,14 @@ public void setId(Long id) {
 	this.id = id;
 }
 
-public String getUsername() {
-	return username;
+
+
+public String getUserName() {
+	return userName;
 }
 
-public void setUsername(String username) {
-	this.username = username;
+public void setUserName(String userName) {
+	this.userName = userName;
 }
 
 public String getPassword() {

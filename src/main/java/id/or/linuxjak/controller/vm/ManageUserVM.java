@@ -10,5 +10,5 @@ public interface ManageUserVM {
 	void UserList();
 	void editUser();
 	void addorUpdate();
-
+	void printPDF();
 }

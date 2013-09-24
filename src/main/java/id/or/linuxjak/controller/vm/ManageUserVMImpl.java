@@ -1,6 +1,9 @@
 package id.or.linuxjak.controller.vm;
 
+import java.io.ByteArrayOutputStream;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import id.or.linuxjak.controller.domain.UserControllerDomain;
@@ -9,9 +12,21 @@ import id.or.linuxjak.domain.User;
 import id.or.linuxjak.domain.UserInfo;
 import id.or.linuxjak.service.UserService;
 
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
+import org.hibernate.annotations.CollectionId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.util.media.AMedia;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zul.Filedownload;
 
 
 @Component("manageUserVM")
@@ -107,6 +122,26 @@ public class ManageUserVMImpl implements ManageUserVM {
 	@NotifyChange("ucd")
 	public void UserList(){
 		  this.ucd = DomaintoControllerDomain.domaintoControllerList(userService.getAll());
+	}
+	
+	public void printPDF(){
+		Collection<UserControllerDomain> coll = this.ucd;
+		System.out.println(Executions.getCurrent().getDesktop().getWebApp().getResourcePaths("/")+" path jasper");
+		  JRDataSource ds = new JRBeanCollectionDataSource(coll);
+		  ByteArrayOutputStream output = new ByteArrayOutputStream();
+		    try {
+		        JasperPrint jasperPrint = JasperFillManager.fillReport(Executions.getCurrent().getDesktop().getWebApp().getRealPath("/") + "/testJasper.jasper", new HashMap(), ds);
+		         JasperExportManager.exportReportToPdfStream(jasperPrint,output);
+		     
+		       	AMedia amedia = new AMedia("report", "pdf", "application/pdf", output.toByteArray());
+				Filedownload.save(amedia);
+
+		    
+		    } catch (Exception e) {
+		        // TODO Auto-generated catch block
+		        e.printStackTrace();
+		    }
+		  
 	}
 	
 	

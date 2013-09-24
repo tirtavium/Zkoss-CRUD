@@ -9,7 +9,7 @@ import java.util.List;
 public class DomaintoControllerDomain {
 	public static UserControllerDomain domaintoController(User user) {
 		UserControllerDomain ucd = new UserControllerDomain();
-		ucd.setUsername(user.getUsername());
+		ucd.setUserName(user.getUsername());
 		// ucd.setPassword(password)
 		ucd.setJob(user.getUserInfo().getJob());
 		ucd.setAddress(user.getUserInfo().getAddress());

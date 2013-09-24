@@ -18,7 +18,7 @@ public class DomainControllertoDomain {
 		usrInfo.setAddress(ucd.getAddress());
 		usrInfo.setUser(usr);
 
-		usr.setUsername(ucd.getUsername());
+		usr.setUsername(ucd.getUserName());
 		usr.setPassword(ucd.getPassword());
 		usr.setUserInfo(usrInfo);
 

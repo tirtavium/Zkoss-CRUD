@@ -69,6 +69,11 @@ public class ManageUserController {
 		manageUserVM.editUser();
 		manageUserVM.UserList();
 	}
+	
+	@Command
+	public void exportPDF(){
+		manageUserVM.printPDF();
+	}
 	public List<String> getJob() {
 		return job;
 	}
