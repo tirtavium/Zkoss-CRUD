@@ -126,6 +126,55 @@
   <artifactId>commons-lang</artifactId> 
   <version>2.4</version> 
   </dependency>
+  
+        <!--JasperReport depenedency starts -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>4.5.1</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.6</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+        <dependency>
+  <groupId>commons-collections</groupId> 
+  <artifactId>commons-collections</artifactId> 
+  <version>3.2.1</version> 
+  </dependency>
+  
+        <dependency>
+            <groupId>commons-digester</groupId>
+            <artifactId>commons-digester</artifactId>
+            <version>2.1</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+        <dependency>
+	<groupId>net.sourceforge.jexcelapi</groupId>
+	<artifactId>jxl</artifactId>
+	<version>2.6.12</version>
+</dependency>
+        <!-- end here report -->
+  
   <dependency>
   <groupId>org.slf4j</groupId> 
   <artifactId>slf4j-log4j12</artifactId> 

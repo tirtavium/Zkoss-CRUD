@@ -1,5 +1,6 @@
 package id.or.linuxjak.controller.vm;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Collection;
 import java.util.Date;
@@ -19,6 +20,8 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JExcelApiExporter;
+import net.sf.jasperreports.engine.export.JExcelApiExporterParameter;
 
 import org.hibernate.annotations.CollectionId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,19 +130,17 @@ public class ManageUserVMImpl implements ManageUserVM {
 	}
 	
 	public void printPDF(){
-		Window win = (Window) Executions.createComponents("/layout/report.zul", null, null);
+		
 		System.out.println(Executions.getCurrent().getDesktop().getWebApp().getResourcePaths("/")+" path jasper");
 		  JRDataSource ds = new JRBeanCollectionDataSource(this.ucd);
 		  ByteArrayOutputStream output = new ByteArrayOutputStream();
 		    try {
 		        JasperPrint jasperPrint = JasperFillManager.fillReport(Executions.getCurrent().getDesktop().getWebApp().getRealPath("/") + "/testJasper.jasper", new HashMap(), ds);
 		         JasperExportManager.exportReportToPdfStream(jasperPrint,output);
-		     
+		  //   JasperExportManager.exportReportToXmlStream(jasperPrint, output);
 		       	AMedia amedia = new AMedia("report", "pdf", "application/pdf", output.toByteArray());
 		//		Filedownload.save(amedia); //untuk download ke browser
-
-				Iframe frame = (Iframe) win.getFellow("reportframe");
-				   frame.setContent(amedia);
+		       	callWin(amedia);
 		    } catch (Exception e) {
 		        // TODO Auto-generated catch block
 		        e.printStackTrace();
@@ -147,6 +148,39 @@ public class ManageUserVMImpl implements ManageUserVM {
 		  
 	}
 	
+	public void printXLS(){
+		System.out.println(Executions.getCurrent().getDesktop().getWebApp().getResourcePaths("/")+" path jasper");
+		  JRDataSource ds = new JRBeanCollectionDataSource(this.ucd);
+		  ByteArrayOutputStream output = new ByteArrayOutputStream();
+		    try {
+		        JasperPrint jasperPrint = JasperFillManager.fillReport(Executions.getCurrent().getDesktop().getWebApp().getRealPath("/") + "/testJasper.jasper", new HashMap(), ds);
+
+		         JExcelApiExporter exporterXLS=new JExcelApiExporter();
+		         exporterXLS.setParameter(JExcelApiExporterParameter.JASPER_PRINT, jasperPrint);
+		         exporterXLS.setParameter(JExcelApiExporterParameter.OUTPUT_STREAM, output);
+		         exporterXLS.setParameter(JExcelApiExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
+		      //   exporterXLS.setParameter(JExcelApiExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.TRUE);
+		         exporterXLS.setParameter(JExcelApiExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
+		         exporterXLS.exportReport();
+		    
+		        
+		         AMedia   amedia = new AMedia("FileFormatExcel", "xls", "application/vnd.ms-excel", output.toByteArray());
+		         Filedownload.save(amedia);
+		      //   callWin(amedia); //tidak bisa di munculkan di iframe
+		    
+		    } catch (Exception e) {
+		        // TODO Auto-generated catch block
+		        e.printStackTrace();
+		    }
+		  
+	}
+	
+	public void callWin(AMedia amedia){
+		Window win = (Window) Executions.createComponents("/layout/report.zul", null, null);
+
+		Iframe frame = (Iframe) win.getFellow("reportframe");
+		   frame.setContent(amedia);
+	}
 	
 	private void clearField(){
 		idUser = null;
