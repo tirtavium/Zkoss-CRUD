@@ -77,11 +77,16 @@
 										constraint="no empty: Please enter your Alamat" multiline="true" /></cell>
 				</row>
 				<row>
+				<cell>
 		    		<button label="Save/Update" onClick="@command('add')"></button>
+</cell>
 	<!-- 	<button label="Edit" onClick="@command('editUser')"></button>
-	 -->	    	
+	 -->
+	 <cell>	    
+	      
 	    <button label="PDF" onClick="@command('exportPDF')" />
-         
+	        <button label="XLS" onClick="@command('exportXLS')" />	
+</cell>
 	 </row>
 				
 			</rows>

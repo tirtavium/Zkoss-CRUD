@@ -74,6 +74,12 @@ public class ManageUserController {
 	public void exportPDF(){
 		manageUserVM.printPDF();
 	}
+	
+	@Command
+	public void exportXLS(){
+		manageUserVM.printXLS();
+	}
+	
 	public List<String> getJob() {
 		return job;
 	}
